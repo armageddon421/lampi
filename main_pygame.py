@@ -94,11 +94,26 @@ while True:
     index += 1
 
     send_data()
-
+    
+    
+    radius = int(screen.get_size()[0]/6/2)
+    pos = [radius*3,0]
     for i in range(12):
         color = get_pixel(i)
         dispcolor = (color[0]/2+color[3]/2, color[1]/2+color[3]/2, color[2]/2+color[3]/2)
-        pygame.draw.circle(screen, dispcolor, (20+i*20, 20), 10)
+
+        
+        if(i == 3 or i == 9):
+            pos[1] += radius*2
+        if(i == 3):
+            pos[0] = 0
+        if(i == 9):
+            pos[0] = radius*3
+
+                
+        pygame.draw.circle(screen, dispcolor, (pos[0]+radius,pos[1]+radius) , radius)
+        pygame.draw.circle(screen, (50,50,50), (pos[0]+radius,pos[1]+radius) , radius,1)
+        pos[0] += radius*2
     
     pygame.display.update()
     clock.tick(30)
